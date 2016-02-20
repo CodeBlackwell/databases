@@ -8,8 +8,6 @@ var parser = require('body-parser');
 // Router
 var router = require('./routes.js');
 
-console.log('The router within app.js', router);
-
 var app = express();
 module.exports.app = app;
 
@@ -34,20 +32,13 @@ db.connection.connect( function(err) {
   console.log('You are now connected...')
 });
 
+db.connection.query('INSERT INTO users (name) VALUES (name)')
+
 // If we are being run directly, run the server.
 if (!module.parent) {
   app.listen(app.get("port"));
   console.log("Listening on", app.get("port"));
 }
 
-app.post('/classes/users', function(req, res) {
-
-  var results = req.body.username;
-  console.log('POST is this being called');
-});
-
-app.get('/', function(req, res) {
-  console.log('GET is this being called');
-});
 
 

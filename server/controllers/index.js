@@ -1,6 +1,6 @@
 var models = require('../models');
 var bluebird = require('bluebird');
-
+var db = require('../db/index.js');
 
 
 module.exports = {
@@ -13,7 +13,10 @@ module.exports = {
     // Ditto as above
     get: function (req, res) {},
     post: function (req, res) {
-      console.log("hello there");
+      //use a connection to the database using db.connection
+      db.connection.query('INSERT INTO users (name) VALUES (hello)');
+      //write to the database
+      console.log("this is the data:", req.body );
     }
   }
 };

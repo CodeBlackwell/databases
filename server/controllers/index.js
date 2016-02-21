@@ -4,19 +4,45 @@ var db = require('../db/index.js');
 
 
 module.exports = {
+
   messages: {
-    get: function (req, res) {}, // a function which handles a get request for all messages
-    post: function (req, res) {} // a function which handles posting a message to the database
+
+    get: function (req, res) {
+
+    },
+
+    post: function (req, res) {
+      console.log("POSTED message data:", req.body );
+      // username: "Valjean",
+      // message: "In mercy's name, three days is all I need.",
+      // roomname: "Hello"
+      /*
+      db.connection.query(
+        "INSERT INTO rooms (name) VALUES ('" + req.body.roomname + "')"
+      );
+      */
+    }
   },
 
   users: {
-    // Ditto as above
-    get: function (req, res) {},
-    post: function (req, res) {
-      //use a connection to the database using db.connection
-      db.connection.query('INSERT INTO users (name) VALUES (hello)');
-      //write to the database
-      console.log("this is the data:", req.body );
+    
+    get: function( req, res ) {
+
+    },
+
+    post: function( req, res ) {
+
+      // DOUBLE quote query string, enclosing nested string values in SINGLE quotes!
+
+      var exists = db.connection.query(
+        "SELECT id FROM users WHERE name = " + req.body.username + "')"
+      );
+
+      if( !exists ) {
+        db.connection.query(
+          "INSERT INTO users (name) VALUES ('" + req.body.username + "')"
+        );
+      }
     }
   }
 };

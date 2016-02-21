@@ -26,15 +26,12 @@ app.use(express.static(__dirname + "/../client"));
 
 db.connection.connect( function(err) {
   if(err) {
-    console.log("error trying to connect");
+    console.log("error trying to connect to database");
     throw err;
   }
-  console.log('You are now connected...')
+  console.log('You are now connected to database...')
 });
 
-db.connection.query('INSERT INTO users (name) VALUES (name)')
-
-// If we are being run directly, run the server.
 if (!module.parent) {
   app.listen(app.get("port"));
   console.log("Listening on", app.get("port"));
